@@ -1,55 +1,124 @@
 //package Projects.StudentManagementSystem.Services;
 //
-//import java.io.BufferedWriter;
-//import java.io.FileWriter;
-//import java.io.IOException;
 //import java.util.ArrayList;
-//import java.util.List;
 //
 //import Projects.StudentManagementSystem.Model.Student;
+//import Projects.StudentManagementSystem.Util.util;
 //
-//public class StudentSevice{
 //
-//    private List<Student> st = new ArrayList<>();
+//public class StudentSevice {
+//    private ArrayList<Student> students;
 //
-//    private static final String FILE_PATH = "students.txt";
+//    public StudentSevice() {
 //
-//    public void addStudent(Student data) {
+//        students = FileUtility.readObject();
 //
-//        st.add(data);
+//    }
 //
-//        try (BufferedWriter bw =
-//                     new BufferedWriter(new FileWriter(FILE_PATH, true))) {
 //
-//            bw.write(data.getId() + "," +
-//                    data.getName() + "," +
-//                    data.getCourse() + "," +
-//                    data.getEmail() + "," +
-//                    data.getAddress() + "," +
-//                    data.getAge() + "," +
-//                    data.getGender() + "," +
-//                    data.getPercentage());
+//    public void addStudent(Student student) {
 //
-//            bw.newLine();
+//        students.add(student);
 //
-//            System.out.println("Student Added Successfully.");
+//        FileUtility.writeObject(students);
 //
-//        } catch (IOException e) {
-//            System.out.println("Error while adding student.");
-//            e.printStackTrace();
+//        System.out.println("Student Added Successfully.");
+//
+//    }
+//    public void viewStudents() {
+//
+//        if(students.isEmpty()) {
+//
+//            System.out.println("No Students Found.");
+//
+//            return;
+//
 //        }
+//
+//        for(Student s : students) {
+//
+//            System.out.println(s);
+//
+//        }
+//
 //    }
+//    public Student searchStudent(int id) {
 //
-//    public void update(int id,) {
+//        for(Student s : students) {
+//
+//            if(s.getId()==id) {
+//
+//                return s;
+//
+//            }
+//
+//        }
+//
+//        return null;
 //
 //    }
+//    public void deleteStudent(int id) {
 //
-//    public void delete() {
+//        Student student = searchStudent(id);
+//
+//        if(student!=null) {
+//
+//            students.remove(student);
+//
+//            FileUtility.writeObject(students);
+//
+//            System.out.println("Deleted Successfully.");
+//
+//        }
+//
+//        else {
+//
+//            System.out.println("Student Not Found.");
+//
+//        }
+//
 //    }
+//    public void updateStudent(int id,String course,int percentage) {
 //
-//    public void viewProfile() {
+//        Student student = searchStudent(id);
+//
+//        if(student!=null) {
+//
+//            student.setCourse(course);
+//
+//            student.setPercentage(percentage);
+//
+//            FileUtility.writeObject(students);
+//
+//            System.out.println("Updated Successfully.");
+//
+//        }
+//
+//        else {
+//
+//            System.out.println("Student Not Found.");
+//
+//        }
+//
 //    }
+//    public void sortStudents() {
 //
-//    public void searchStudent() {
+//        students.sort((s1,s2)->s1.getName().compareTo(s2.getName()));
+//
+//        viewStudents();
+//
+//    }
+//    public  void saveStudents() {
+//        FileUtility.writeObject(students);
+//
+//        System.out.println("Students saved successfully.");
+//    }
+//    public static void loadStudents() {
+//        loadStudents();
+//
+//        System.out.println("Students loaded successfully.");
+//
+//
+//
 //    }
 //}
